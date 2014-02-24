@@ -1,0 +1,288 @@
+apuntes linux
+
+
+http://lamiradadelreplicante.com/2011/07/21/acceder-a-las-
+
+carpetas-del-sistema-como-root-de-forma-grafica/
+
+Por ejemplo si queremos lanzar dolphin como administrador 
+
+de archivos haríamos:
+
+kdesu dolphin
+Y si preferimos navegar con konqueror bastaría con:
+
+kdesu konqueror
+
+
+
+
+
+
+http://www.howtoforge.com/installing-apache2-with-php5-
+
+and-mysql-support-on-opensuse-12.2-lamp
+
+
+comandos linux debian
+
+apt-get update //actualiza los repositorios y los carga en 
+
+una cacheu
+
+apt-cache search ssh |less  (|less) paginador
+
+apt-get install ssh
+
+
+ls listar , ls-l listado
+
+ls -l /etc/ssh/
+
+
+ls /  -->absoluto
+ls ../.. relativo
+pwd    donde estoy
+cat   ver fichero
+cd / me deja en la raiz o es para entrar a directorios
+pwd > donde_estoy    me manda en un fichero la ruta de 
+
+donde me encuentro
+ps  muestra procesos activos
+mkdir    permite crear directorio
+rm      [nombre de archivo]         borrar archivo
+rm -r   [nombre del directorio]   para las carpetas
+cp  xfichero directorioprueba/      copiar fichero 
+
+mv                                  mover fichero
+
+forzando un error
+
+cat /etc/shadow > denegado  "aparece un error y no almacena 
+
+en el fichero denegado"
+cat /etc/shadow 2> denegado  "manda a fichero"   forma 
+
+desatendida
+cat /etc/shadow 2>> denegado   "asi genera un archivo 
+
+sobreescrito" de errores
+
+
+ayudas simples
+programa  -p [atributos]
+
+ls --help  ----> ayudas simples
+
+
+ayuda extendida con el programa MAN
+
+man [parametro]
+
+man ls
+
+*********************
+TUBERIAS "PIPE"
+salidas 
+ls -l /etc/
+
+salidas que son entradas para otro programa que tambien 
+
+tendra una salida
+que tambien puede ser una entrada de otro programa   y asi 
+
+indifidamente que tambien puede es el mismo programa 
+
+anterior :(   PIPE
+
+PROGRAMA1  ->   (SALIDA del programa1) es (ENTRADA para el 
+
+programa2) -> programa2 -> es
+(salida del programa 2) que es (entrada para el programa3  
+
+o 2 o 1 y asi)
+
+
+
+ejemplo
+ls -l /etc/ |less
+ls el programa con un listado, pero como no se puede 
+
+navegar usamos el programa LESS(paginacion)
+hay otro es el more pero es mejor el LESS
+
+
+ls -l /etc/ |head (muestra las primera 10 lineas)
+ls -l /etc/ |head |less
+ls -l /etc/ |head -n 20 (muestra 20 lineas)
+ls -l /etc/ |head -n 20 |less (muestra 20 lineas y los 
+
+pagina)
+
+ls -l /etc/ |tail -n 20 |less (muestra las ultimas 20 
+
+lineas y los pagina)
+ls -lt /etc/ |tail -n 20 |less (muestra las ultimas 20 
+
+lineas y los pagina) (t)ordena por tiempo de mayor año a 
+
+menor.
+ls -lt /etc/ |head -n 20 |less (muestra las ultimas 20 
+
+lineas y los pagina) (t)ordena por tiempo de mayor año a 
+
+menor.
+ls -lt --ful-time /etc/ |head -n 20 |less (muestra las 
+
+ultimas 20 lineas y los pagina) (t)ordena por tiempo de 
+
+mayor año a menor.
+|sort   (ordena por columna)
+|sort -k
+|sort -n -k5 (-n es tipo numero, lo que queremos ordenar 
+
+por eso se pone n, k5 es la columna por donde queremos 
+
+pasar)
+|sort -n -k5 |less (muestra y podemos paginar)
+|sort -n -k5 |head -n 20 |less (solo los 20 primeros)
+sort --help  ayuda al comando   sort --help |less
+man sort   manual de uso
+
+********************************************************
+
+
+
+un programa puede tener 2 salidas
+por ejemplo cat
+cat espera su parametros pero para salir de manera normal o 
+
+intentar salir
+seria ctr+c
+pero si estatrabado se puede matar el proceso
+ctrl + x
+
+ps ax |grep -top     (grep - la salida de ps la puedo 
+
+filtrar me busca la palabra top)
+
+ps todos los procesos en este terminal
+ps ax todos los procesos que se estan ejecutando en el 
+
+ordenador mio y los demas
+
+
+top es un proceso  EL que muestra los procesos en pantalla
+cuando haga el filtrado puedo matar el proceso por el 
+
+numero identificador
+kill [numero] salida normal con kill, cierra y hace todo lo 
+
+que tiene que hacer antes de cerrar, es un 
+cerrar normal, limpio.
+kill -9 [numerodeproceso]   kill mata el proceso lo saca de 
+
+manera bruta.
+
+
+
+
+
+*******************************************
+
+w ver usuarios en ssh dentro (no se si sea para otros 
+
+casos)
+top procesos en ejecucion
+
+
+
+***********************************
+
+
+ficheros ocultos
+
+ls -la   (a de all todos)
+
+"ficheros con .[nombrefichero] se oculta"
+ejemplo
+mv denegado .denegado
+ls   (ya no aparece)
+ls -a el fichero si aparece
+
+para haceeegado denegado
+
+----------------------------------
+du comando para visalizar los tamanos  (-h, -sh)
+df comando para visualizar particiones (-h)
+mount montar dispositivos
+updatedb   acutalizar base de datos locas sobre informacion 
+
+que hay en mi pc.
+locate      me permite buscar informacion usando la base de 
+
+datos updatedb
+find      para buscar leyendo directamente el disco el mapa 
+
+de la particion no en el disco por completo.
+
+find /etc/ -name passwd
+find /etc/ -size +2000c   (buscar todos los ficheros mas de 
+
+ 2000 bites)
+
+fin /etc/ -size +2000 |wc -l (el pipe cuenta el numero de 
+
+lineas de los resutados de esa busqueda)
+
+
+en el editor ejemp: man find   = se pueden poner comandos 
+
+por ejemplo buscar con un criterio de busqueda (/ -size)
+
+casi cualquier programa que instale un usario se ponen en 
+
+usr (los codigos, manuales, etc) programas que no sean 
+
+primordiales del sistema.
+
+uname -a (que kernel tenemos)
+los programas podemos llamar directamente con bin
+/bin/ls
+pero se usa asi
+ls 
+poweroff apagar pc
+
+
+---------------------------------
+df en etc
+df -h 
+df -hi  vemos pero lo que hay en el mapa de nodos
+
+
+
+******************************************
+permisos para los ficheros regulares o los que sean
+
+crearemos un fichero llamado listado de enemigos
+en el directorio CIUDADANOS 
+echo "listadoenemigos" > listadoEnemigos
+ls -l
+-rw-r--- 1 magneto villanos   xxxxxxxxxxxxxxx  listadoEnemigos
+[permisos] [usuario][gurpo]   [datos fecha]		[fichero]
+
+cambiando permisos
+con MASCARA son en octal
+
+chmod 770 listadoEnemigos   <  -- esto es equivalente a chmod u=rwx,g=rwx,o=0 listadoEnemigos
+ls -l
+-rwxrwx---  
+
+chmod 000 listadoEnemigos
+ls -l
+----------
+
+
+
+
+
