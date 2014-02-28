@@ -282,6 +282,81 @@ chmod 000 listadoEnemigos
 ls -l
 ----------
 
+creando un fichero 
+/home/ciudadanos$ echo ola > ola
+fichero hola tiene permisos predeterminados
+
+cambiando los permisos predeterminados
+
+establecer por defecto los permisos predeterminados
+umask
+cambiando umask
+umask 0022
+
+
+=============================
+EN OCTAL normal      con UMASK es al reves 
+000 0 > ---          rwx
+001 1 > --x          rw-
+010 2 > -w-          r-x
+011 3 > -wx          r-- 
+100 4 > r--          -wx
+101 5 > r-x          -w-
+110 6 > rw-          --x
+111 7 > rwx          ---
+============================
+cambiando con chmod
+chmod 777 ola  >> me da todos los permisos
+
+cambiando la mascara
+umask 777       >>esto hace referencia al directorio donde se aloja el archivo ola y genera permisos denegados, porque son al reves en UMASK
+
+UMASK es de diferente compartamiento si es fichero o directorio, los directorios tienen mas prioridad, esto pasa por que si se hace una carpeta con permisos de no ejecucion no se puede abrir por esto se comporta de diferente manera.
+
+borrando un fichero si hay muchos archivos por ejeplo ola, ola3 ola4
+ponemos ola* y borra todos ellos 
+rm -r mascara >> borrando la carpeta
+rm ola*
+
+
+=======================================
+setgid
+
+crear archivos o directorios con el grupo que pertenece a esa carpeta
+
+ls -l
+drwxrwx--- 2 magneto	CIUDADANOS  	fechaxxxxx 		ciudadanos
+creamos un archivo en ciudadanos
+echo ola >olal
+ls -l    >>dentro de ciudadanos
+-rw-r--r-- 1 magneto 	villanos		fechaxxxxx		olal   >> olal se ah creado con el grupo villano
+
+
+generando el SETGI
+
+chmod g+s ciudadanos/    >>> el permiso S se lo agrega a ciudadanos/
+ls -l
+drwxrws--- 2 magneto	CIUDADANOS  	fechaxxxxx 		ciudadanos  << ahora vemos que tiene el SETGID activado, aparece MINUSCULA porque el permiso de ejecucion al grupo esta ACTIVADO.
+
+desactivando el permiso de ejecucion
+chmod g-x ciudadanos/
+ls -l
+drwxrwS--- 2 magneto	CIUDADANOS  	fechaxxxxx 		ciudadanos  << aparece la S mayuscula por que el permiso de ejecucion al grupo a sido desactivado.
+
+activando el permiso de ejecucion a la carpeta
+
+chmod g+x ciudadanos/
+ls -l 
+
+
+
+
+
+
+
+
+
+
 
 
 
